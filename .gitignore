@@ -1,0 +1,7 @@
+# Real config holds phone numbers / addresses
+backup.conf
+
+# Local test output
+*.sql.gz
+*.sql.gz.partial
+*.log

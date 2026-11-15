@@ -1,0 +1,35 @@
+# backup.conf - settings for backup-mysql.sh
+#
+# Copy to /etc/mysql-backup/backup.conf (install.sh does this) and edit.
+# The real backup.conf is git-ignored so phone numbers and addresses stay
+# out of the repository. This file is sourced by bash: KEY="value", no spaces
+# around "=".
+
+# Where dumps are written. Each container gets its own subdirectory.
+BACKUP_ROOT="/opt/backupsql/sqlbackup"
+
+# Extended regex matched against running container names.
+CONTAINER_FILTER="mysql"
+
+# Retention: backups older than RETENTION_DAYS are deleted, but the newest
+# MIN_KEEP verified backups are always kept, whatever their age. With a daily
+# schedule, MIN_KEEP=7 is always at least a week of good backups.
+RETENTION_DAYS=30
+MIN_KEEP=7
+
+# Skip the run (and send a failure notice) if the backup disk has less free
+# space than this, in megabytes.
+MIN_FREE_MB=1024
+
+# Notifications. EMAIL_TO is space-separated; leave it empty to disable.
+# SMS gateways work here, e.g. 5551234567@tmomail.net (T-Mobile),
+# 5551234567@vtext.com (Verizon), 5551234567@txt.att.net (AT&T).
+EMAIL_TO=""
+EMAIL_FROM=""
+EMAIL_SUBJECT_PREFIX="DB Backup"
+
+# Any sendmail-compatible binary: ssmtp, or msmtp with the msmtp-mta package.
+SENDMAIL_BIN="/usr/sbin/sendmail"
+
+# "yes" texts you after every run; "no" only texts on failures.
+NOTIFY_ON_SUCCESS="yes"
